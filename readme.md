@@ -1,7 +1,7 @@
 # 从0-1利用hapi框架搭建node项目，实现登陆注册功能
 - npm init -y
 - npm i @hapi/hapi --registry=https://registry.npmmirror.com
-- npm i -D typescript ts-node-dev @types/node
+- npm i -D typescript tsx @types/node
 - npx tsc --init
 - 编辑tsconfig.json文件
 
@@ -11,10 +11,10 @@ typescript:
 - 把.ts文件编译为.js文件
 - 提供类型检查
 
-ts-node-dev:
-- 专门为typescript设计
+tsx:
 - 直接运行.ts文件，不需要先编译
-- 整合了 ts-node 和文件监控功能
+- 不生成.js文件
+- 启动速度非常快
   
 @types/node:
 - Node.js的类型定义文件
