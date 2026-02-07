@@ -2,6 +2,8 @@
 - npm init -y
 - npm i @hapi/hapi --registry=https://registry.npmmirror.com
 - npm i -D typescript tsx @types/node
+- npm i mongoose
+- npm i -D @types/mongoose
 - npx tsc --init
 - 编辑tsconfig.json文件
 
@@ -29,3 +31,5 @@ tsx:
   - src/config
   - src/app.ts: 写初始化代码
 
+## 连接数据库
+  - src/config/database.ts

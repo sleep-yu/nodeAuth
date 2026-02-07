@@ -1,7 +1,11 @@
 import { Server } from "@hapi/hapi";
 import routes from "./routes";
+import { connectDB } from "./config/database";
 
 const init = async () => {
+  // 先连接数据库
+  await connectDB();
+
   const server = new Server({
     port: 5000,
     host: 'localhost'
