@@ -7,6 +7,8 @@ export const register = async (request: any, h: any) => {
     const result = await registerUser(payload);
     if (!result.success) {
       return h.response(result).code(400);
+    } else {
+      return h.response(result).code(200);
     }
   } catch (error) {
     return h.response({

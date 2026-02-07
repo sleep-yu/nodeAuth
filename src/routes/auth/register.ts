@@ -4,10 +4,23 @@ import { register } from '../../controllers/authController';
 
 const registerPayloadSchema = Joi.object({
   email: Joi.string().email().required().description('邮箱'),
-  password: Joi.string().min(6).max(15).required().description('密码'),
+  password: Joi.string().required().description('密码'),
   username: Joi.string().min(2).max(45).optional().description('用户名'),
   nickname: Joi.string().min(2).max(45).optional().description('昵称'),
   sex: Joi.number().valid(0, 1, 2).optional().description('性别: 0-男, 1-女, 2-未选择')
+})
+
+const registerResponseSchema = Joi.object({
+  success: Joi.boolean().required(),
+  message: Joi.string().required(),
+  data: Joi.object({
+    _id: Joi.string().required(),
+    email: Joi.string().email().required(),
+    username: Joi.string().allow(null).optional(),
+    nickname: Joi.string().allow(null).optional(),
+    sex: Joi.number().valid(0, 1, 2).required(),
+    createdAt: Joi.date().required()
+  }).required()
 })
 
 export const registerRecord: RouteOptions = {
@@ -16,6 +29,9 @@ export const registerRecord: RouteOptions = {
   tags: ['api', 'auth'],
   validate: {
     payload: registerPayloadSchema
+  },
+  response: {
+    status: { 200: registerResponseSchema }
   },
   handler: register
 };
