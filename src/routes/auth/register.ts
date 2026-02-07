@@ -4,23 +4,22 @@ import { register } from '../../controllers/authController';
 
 const registerPayloadSchema = Joi.object({
   email: Joi.string().email().required().description('邮箱'),
-  password: Joi.string().required().description('密码'),
+  password: Joi.string().min(6).max(15).required().description('密码'),
   username: Joi.string().min(2).max(45).optional().description('用户名'),
   nickname: Joi.string().min(2).max(45).optional().description('昵称'),
   sex: Joi.number().valid(0, 1, 2).optional().description('性别: 0-男, 1-女, 2-未选择')
 })
 
 const registerResponseSchema = Joi.object({
-  success: Joi.boolean().required(),
-  message: Joi.string().required(),
+  success: Joi.boolean().required().description('是否成功'),
+  message: Joi.string().optional().allow('', null).description('消息提示'),
   data: Joi.object({
-    _id: Joi.string().required(),
-    email: Joi.string().email().required(),
-    username: Joi.string().allow(null).optional(),
-    nickname: Joi.string().allow(null).optional(),
-    sex: Joi.number().valid(0, 1, 2).required(),
-    createdAt: Joi.date().required()
-  }).required()
+    id: Joi.any().optional().description('id'),
+    email: Joi.string().optional().description('邮箱'),
+    username: Joi.string().allow('', null).optional().description('用户名'),
+    nickname: Joi.string().allow('', null).optional().description('昵称'),
+    sex: Joi.number().optional().description('性别'),
+  }).optional().description('数据层')
 })
 
 export const registerRecord: RouteOptions = {
@@ -31,7 +30,8 @@ export const registerRecord: RouteOptions = {
     payload: registerPayloadSchema
   },
   response: {
-    status: { 200: registerResponseSchema }
+    status: { 200: registerResponseSchema },
+    options: { stripUnknown: true }
   },
   handler: register
 };

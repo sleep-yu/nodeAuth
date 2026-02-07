@@ -50,12 +50,6 @@ const UserSchema: Schema = new Schema({
   password: {
     type: String,
     required: [true, '密码不能为空'],
-    validate: {
-      validator: function (v: string) {
-        return v.length >= 6 && v.length <= 15;
-      },
-      message: '昵称长度必须是6~15之间'
-    }
   },
   sex: {
     type: Number,
@@ -66,7 +60,14 @@ const UserSchema: Schema = new Schema({
     }
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: {
+    transform: function (doc, ret: any) {
+      delete ret.password;
+      delete ret.__v;
+      return ret
+    }
+  },
 })
 
 export default mongoose.model<IUser>('User', UserSchema);

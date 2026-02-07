@@ -10,17 +10,20 @@ export const registerUser = async (data: IRegisterData) => {
     // 加密密码
     const hashPassword = await bcrypt.hash(data.password, SALT_ROUNDS);
     // 创建用户，使用加密后的密码
-    const user = new User({
+    const user = await User.create({
       ...data,
       password: hashPassword
-    });
-    await user.save();
+    })
 
-    return {
+    const result = {
       success: true,
       message: '注册成功',
-      data: user
+      data: {
+        ...user.toJSON(),
+        id: user._id
+      }
     }
+    return result;
   } catch (error: any) {
     if (error.code === 11000) {
       return {
