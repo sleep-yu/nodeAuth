@@ -37,3 +37,7 @@ dotenv:
 
 ## 连接数据库
   - src/config/database.ts
+
+## 加密
+npm i bcrypt
+npm i -D @types/bcrypt
