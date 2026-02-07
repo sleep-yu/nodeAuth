@@ -4,6 +4,7 @@
 - npm i -D typescript tsx @types/node
 - npm i mongoose
 - npm i -D @types/mongoose
+- npm i dotenv
 - npx tsc --init
 - 编辑tsconfig.json文件
 
@@ -22,6 +23,9 @@ tsx:
 - Node.js的类型定义文件
 - 让TypeScript认识process、console等Node内置对象
 - 提供类型提示和检查
+
+dotenv:
+- 读取环境变量
 
 ## 创建基础文件 
   - src/routers 

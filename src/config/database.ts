@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const MONGODB_URI = process.env.MONGIDB_URI || 'mongodb://localhost:27017/node-auth';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/node-auth';
 
 export const connectDB = async () => {
   try {
