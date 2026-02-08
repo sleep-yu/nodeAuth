@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "dotenv -e .env.development tsx watch src/app.ts",
     "start": "dotenv -e .env.production -- tsx src/app.ts",
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -25,12 +24,12 @@
     "bcrypt": "^6.0.0",
     "dotenv-cli": "^11.0.0",
     "joi": "^18.0.2",
-    "mongoose": "^9.1.6"
+    "mongoose": "^9.1.6",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/mongoose": "^5.11.96",
-    "@types/node": "^25.2.0",
-    "tsx": "^4.21.0"
+    "@types/node": "^25.2.0"
   }
 }
