@@ -1,0 +1,25 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # 添加这一行,允许手动触发
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /www/wwwroot/nodeAuth
+            git pull origin main
+            docker-compose down
+            docker build -t nodeAuth-app .
+            docker-compose up -d
+            docker-compose exec -T app npx sequelize-cli db:migrate --config config/config.json --migrations-path migrations
+

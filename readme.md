@@ -46,3 +46,5 @@ npm i -D @types/bcrypt
 1.根目录创建Dockerfile 设置打镜像包要执行的命令，用的node版本
 2.创建.dockerignore文件
 3.创建docker-compose.yml文件 设置数据库连接地址，端口号等
+4.创建.github/workflows文件夹，然后此文件夹下创建deploy.yml文件：github actions工作流文件
+
