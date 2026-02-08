@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # 添加这一行,允许手动触发
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,5 +21,3 @@ jobs:
             docker-compose down
             docker build -t nodeAuth-app .
             docker-compose up -d
-            docker-compose exec -T app npx sequelize-cli db:migrate --config config/config.json --migrations-path migrations
-
