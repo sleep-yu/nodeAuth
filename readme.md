@@ -47,4 +47,17 @@ npm i -D @types/bcrypt
 2.创建.dockerignore文件
 3.创建docker-compose.yml文件 设置数据库连接地址，端口号等
 4.创建.github/workflows文件夹，然后此文件夹下创建deploy.yml文件：github actions工作流文件
+5.在服务器中安装docker,安装完成后：docker --version可以看是否安装成功
+6.在服务器上生成ssh密钥：ssh-keygen -t ed25519 -C "github-actions" -f ~/.ssh/github_actions
+然后按两次回车
+7.将公钥添加到授权列表：cat ~/.ssh/github_actions.pub >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
 
+8.cat ~/.ssh/github_actions，复制ssh私钥内容
+
+9.在github仓库页面，进入Settings->Secret and variables -> Actions -> New repository secret，添加下面的secret
+  - Name: SSH_PRIVATE_KEY Value: 私钥内容
+  - Name: SERVER_HOST value:8.129.26.149(服务器ip)
+  - Name: SERVER_USER value: root
+
+10.服务器安装git

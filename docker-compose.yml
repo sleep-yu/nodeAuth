@@ -5,5 +5,19 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGODB_URI=${MONGODB_URI}
+      - MONGODB_URI=mongodb://mongo:27017/node-auth
+    depends_on:
+      - mongo
     restart: always
+
+  mongo:
+    image: mongo:7
+    container_name: nodeauth-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:
