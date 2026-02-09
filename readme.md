@@ -60,4 +60,6 @@ chmod 600 ~/.ssh/authorized_keys
   - Name: SERVER_HOST value:8.129.26.149(服务器ip)
   - Name: SERVER_USER value: root
 
-10.服务器安装git
+10.服务器安装git:yum install git -y
+11.cd /www/wwwroot && git clone https://github.com/sleep-yu/nodeAuth.git
+
