@@ -64,3 +64,4 @@ chmod 600 ~/.ssh/authorized_keys
 11.cd /www/wwwroot && git clone https://github.com/sleep-yu/nodeAuth.git
 
 12.配置反向代理：宝塔面板->网站->反向代理，安装nginx
+13.aliyun放行端口号5000+数据库端口号27017 - 防火墙 添加规则
