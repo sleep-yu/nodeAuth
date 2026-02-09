@@ -62,4 +62,3 @@ chmod 600 ~/.ssh/authorized_keys
 
 10.服务器安装git:yum install git -y
 11.cd /www/wwwroot && git clone https://github.com/sleep-yu/nodeAuth.git
-
