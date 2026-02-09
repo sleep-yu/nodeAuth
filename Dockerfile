@@ -5,8 +5,8 @@ FROM node:20-alpine
 WORKDIR /app
 
 # 复制 package.json 并安装依赖
-COPY package*.json ./
-RUN npm config set registry https://registry.npmmirror.com && npm install --omit=dev
+COPY package.json ./
+RUN echo "registry=https://registry.npmmirror.com" > .npmrc && npm install --omit=dev
 
 # 复制源代码
 COPY . .
