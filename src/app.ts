@@ -8,7 +8,7 @@ const init = async () => {
 
   const server = new Server({
     port: 5000,
-    host: 'localhost'
+    host: '0.0.0.0'
   })
   // 注册所有路由
   server.route([...routes]);
