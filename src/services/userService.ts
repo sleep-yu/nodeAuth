@@ -1,6 +1,7 @@
 import User from "../model/User";
-import { IRegisterData } from "../interface";
+import { IRegisterData, ISignInPayload } from "../interface";
 import bcrypt from 'bcrypt';
+import jwt from "jsonwebtoken";
 
 // 加密强度
 const SALT_ROUNDS = 10;
@@ -20,7 +21,6 @@ export const registerUser = async (data: IRegisterData) => {
       message: '注册成功',
       data: {
         ...user.toJSON(),
-        id: user._id
       }
     }
     return result;
@@ -40,4 +40,30 @@ export const registerUser = async (data: IRegisterData) => {
 
     throw error;
   }
+}
+
+export const signInUser = async (data: ISignInPayload) => {
+  const { login, password } = data;
+
+  // 通过邮箱或用户名查找用户
+  const user = await User.findOne({
+    $or: [{ email: login }, { username: login }]
+  }).select('+password');
+
+  if (!user) {
+    return { success: false, message: '用户不存在' };
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return { success: false, message: '密码错误' };
+  }
+
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, { expiresIn: '7d' })
+
+  return {
+    success: true,
+    message: '登录成功',
+    data: { token, ...user.toJSON() }
+  };
 }

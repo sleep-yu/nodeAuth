@@ -1,5 +1,5 @@
-import { registerUser } from "../services/userService";
-import { IRegisterData } from "../interface";
+import { registerUser, signInUser } from "../services/userService";
+import { IRegisterData, ISignInPayload } from "../interface";
 
 export const register = async (request: any, h: any) => {
   const payload = request.payload as IRegisterData;
@@ -14,6 +14,22 @@ export const register = async (request: any, h: any) => {
     return h.response({
       success: false,
       message: '注册失败'
+    }).code(500);
+  }
+}
+
+export const signIn = async (request: any, h: any) => {
+  const payload = request.payload as ISignInPayload;
+  try {
+    const result = await signInUser(payload);
+    if (!result.success) {
+      return h.response(result).code(400);
+    }
+    return h.response(result).code(200);
+  } catch (error) {
+    return h.response({
+      success: false,
+      message: '登录失败'
     }).code(500);
   }
 }

@@ -18,3 +18,8 @@ export interface ILoginData {
   email: string;
   password: string;
 }
+
+export interface ISignInPayload {
+  login: string; // username or email
+  password: string;
+}
